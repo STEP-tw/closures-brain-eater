@@ -61,15 +61,12 @@ const makeFiboGenerator = function(lastNum,NumBeforeLast){
 };
 
 const makeCycler = function(givenList){
-  let index = -1;
   let isFirstTime = true;
   let list = givenList.slice(0);
+  let index = -1;
   return function(){
-    if(index != list.length-1){
-      index++;
-      return list[index];
-    }
-    index = 0;
+    index++;
+    index = (index + list.length)%list.length;
     return list[index];
   }
 };

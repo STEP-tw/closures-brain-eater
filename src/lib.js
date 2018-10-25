@@ -75,23 +75,13 @@ const makeCycler = function(givenList){
 };
 const curry = function(func,commonArg){
   return function(secondArg,thirdArg){
-    if(!thirdArg && thirdArg != 0 && thirdArg != false){
-      return func(commonArg,secondArg);
-    }
     return func(commonArg,secondArg,thirdArg); 
   }
 };
 const compose = function(func1,func2){
   return function(firstArg,secondArg){
     let returnValueOfFunc2;
-    let isFunc2Called = false;
-    if(!secondArg && secondArg !=0 && secondArg != false){
-      returnValueOfFunc2 = func2(firstArg);
-      isFunc2Called = true;
-    }
-    if(!isFunc2Called){
-      returnValueOfFunc2 = func2(firstArg,secondArg);
-    }
+    returnValueOfFunc2 = func2(firstArg,secondArg);
     return func1(returnValueOfFunc2);
   }
 };
@@ -101,6 +91,6 @@ exports.makeCounterFromZero=makeCounterFromZero;
 exports.makeCounterFromN=makeCounterFromN;
 exports.makeDeltaTracker=makeDeltaTracker;
 exports.makeFiboGenerator=makeFiboGenerator;
-  exports.makeCycler=makeCycler;
+exports.makeCycler=makeCycler;
 exports.curry=curry;
 exports.compose=compose;

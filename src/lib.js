@@ -73,7 +73,14 @@ const makeCycler = function(givenList){
     return list[index];
   }
 };
-const curry = undefined;
+const curry = function(func,commonArg){
+  return function(secondArg,thirdArg){
+    if(!thirdArg){
+      return func(commonArg,secondArg);
+    }
+    return func(commonArg,secondArg,thirdArg); 
+  }
+};
 const compose = undefined;
 
 exports.makeConstant=makeConstant;
@@ -81,6 +88,6 @@ exports.makeCounterFromZero=makeCounterFromZero;
 exports.makeCounterFromN=makeCounterFromN;
 exports.makeDeltaTracker=makeDeltaTracker;
 exports.makeFiboGenerator=makeFiboGenerator;
-exports.makeCycler=makeCycler;
+  exports.makeCycler=makeCycler;
 exports.curry=curry;
 exports.compose=compose;

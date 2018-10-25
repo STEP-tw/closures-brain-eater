@@ -59,7 +59,20 @@ const makeFiboGenerator = function(lastNum,NumBeforeLast){
     return currentNumber;
   }
 };
-const makeCycler = undefined;
+
+const makeCycler = function(givenList){
+  let index = -1;
+  let isFirstTime = true;
+  let list = givenList.slice(0);
+  return function(){
+    if(index != list.length-1){
+      index++;
+      return list[index];
+    }
+    index = 0;
+    return list[index];
+  }
+};
 const curry = undefined;
 const compose = undefined;
 

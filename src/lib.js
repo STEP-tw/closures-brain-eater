@@ -13,26 +13,24 @@ const makeCounterFromZero = function(){
   return makeCounterFromN(0);
 };
 const makeDeltaTracker = function(start){
-  let deltaValues ={old:start,delta:0,new:start};
+  let oldNum = start;
   return function(delta){ 
-    if(delta){
-      deltaValues.old = deltaValues.new;
-      deltaValues.delta = delta; 
-      deltaValues.new = deltaValues.old + delta;
-      return deltaValues;
+    if(delta == undefined){
+      delta = 0;
     }
-    deltaValues.new = deltaValues.old;
-    deltaValues.delta = 0;
-    return deltaValues;
+    let old = oldNum;
+    let newNum = old + delta;
+    oldNum = newNum;
+    return {old,delta,new:newNum};
   }
 };
 
 const makeFiboGenerator = function(NumBeforeLast,lastNum){
-  if(!NumBeforeLast){
+  if(NumBeforeLast == undefined){
     NumBeforeLast = 0;
     lastNum = 1;
   }
-  if(!lastNum){
+  if(lastNum == undefined){
     lastNum = NumBeforeLast;
     NumBeforeLast = 0;
   }

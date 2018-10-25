@@ -26,7 +26,39 @@ const makeDeltaTracker = function(start){
     return deltaValues;
   }
 };
-const makeFiboGenerator = undefined;
+const makeFiboGenerator = function(lastNum,NumBeforeLast){
+  let currentNumber;
+  let sNo = 1;
+  if(!lastNum){
+     lastNum = 1;
+  }
+ if(NumBeforeLast || NumBeforeLast == 0)
+  {
+    let lastNumber = lastNum;
+    lastNum = NumBeforeLast;
+    NumBeforeLast = lastNumber;
+  }
+  if(!NumBeforeLast){
+    NumBeforeLast = 0;
+  }
+  return function(){
+    if(sNo == 2){
+      currentNumber = lastNum;
+      sNo++;
+      return currentNumber;
+    }
+    if(sNo == 1){
+      currentNumber = NumBeforeLast;
+      sNo++;
+      return currentNumber;
+    }
+    currentNumber = lastNum + NumBeforeLast;
+    NumBeforeLast = lastNum;
+    lastNum = currentNumber;
+    sNo++;
+    return currentNumber;
+  }
+};
 const makeCycler = undefined;
 const curry = undefined;
 const compose = undefined;

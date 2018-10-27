@@ -14,10 +14,7 @@ const makeCounterFromZero = function(){
 };
 const makeDeltaTracker = function(start){
   let oldNum = start;
-  return function(delta){ 
-    if(delta == undefined){
-      delta = 0;
-    }
+  return function(delta = 0){ 
     let old = oldNum;
     let newNum = old + delta;
     oldNum = newNum;
@@ -25,40 +22,23 @@ const makeDeltaTracker = function(start){
   }
 };
 
-const makeFiboGenerator = function(NumBeforeLast,lastNum){
-  if(NumBeforeLast == undefined){
-    NumBeforeLast = 0;
-    lastNum = 1;
-  }
-  if(lastNum == undefined){
-    lastNum = NumBeforeLast;
-    NumBeforeLast = 0;
-  }
-  let sno = 1;
+const makeFiboGenerator = function(number1 = 1,number2 = 0){
+  let fiboSeries = {currentNum : null, nextNum : Math.min(number1,number2) , secondNextNum : Math.max(number2,number1) }
   return function(){
-    if(sno == 1){
-      sno++;
-      return NumBeforeLast;
-    }
-    if(sno == 2){
-      sno++;
-      return lastNum;
-    }
-    let currentNumber = lastNum + NumBeforeLast;
-    NumBeforeLast = lastNum;
-    lastNum = currentNumber;
-    return currentNumber;
+    fiboSeries.currentNum = fiboSeries.nextNum;
+    fiboSeries.nextNum = fiboSeries.secondNextNum;
+    fiboSeries.secondNextNum = fiboSeries.currentNum + fiboSeries.nextNum;
+    return fiboSeries.currentNum;
   }
 };
 
 const makeCycler = function(givenList){
   let isFirstTime = true;
   let list = givenList.slice(0);
-  let index = -1;
+  let index = 0;
   return function(){
-    index++;
     index = (index + list.length)%list.length;
-    return list[index];
+    return list[index++];
   }
 };
 const curry = function(func,commonArg){
